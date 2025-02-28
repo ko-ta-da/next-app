@@ -4,7 +4,7 @@ import Article from "@/app/_components/Article";
 import ButtonLink from "@/app/_components/ButtonLink";
 import styles from "./page.module.css";
 
-export default async function Page({ params, searchParams }) {
+export default async function Page({ params, searchParams } : any) {
   const { slug } = params; // 型はNext.js側が推論してくれる
   const data = await getNewsDetail(slug, {
     draftKey: searchParams?.draftKey,

@@ -6,13 +6,14 @@ import styles from "./page.module.css";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
-  searchParams: { draftKey?: string };
+  searchParams: Promise<{ draftKey?: string }>;
 }
 
 export default async function Page({ params, searchParams }: PageProps) {
-  const { slug } = await params; // paramsはPromiseなのでawaitで中身を取り出す
+  const { slug } = await params; // 非同期に取得
+  const { draftKey } = await searchParams; // searchParamsもPromiseで受け取る
   const data = await getNewsDetail(slug, {
-    draftKey: searchParams?.draftKey,
+    draftKey,
   }).catch(notFound);
   return (
     <>

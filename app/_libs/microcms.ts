@@ -64,16 +64,24 @@ export const getNewsDetail = async (contentId: string, queries?: MicroCMSQueries
         endpoint: "news",
         contentId,
         queries,
+        customRequestInit: {
+            next: {
+                revalidate: queries?.draftKey === undefined ? 60 : 0,
+            }
+        },
     });
     return detailData;
 };
 
 // categoriesエンドポイントからカテゴリ一覧を取得する関数
-export const getCategoryDetail = async (contentId: string, queries?: MicroCMSQueries) => {
-    const detailData = await client.getListDetail<Category>({
-        endpoint: "categories",
-        contentId,
-        queries,
-    });
-    return detailData;
+export const getCategoryDetail = async (
+    contentId: string,
+    queries?: MicroCMSQueries,
+    ) => {
+        const detailData = await client.getListDetail<Category>({
+            endpoint: "categories",
+            contentId,
+            queries,
+        });
+        return detailData;
 }

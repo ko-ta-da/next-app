@@ -3,12 +3,6 @@ import { NEWS_LIST_LIMIT } from "@/app/_components/_constants";
 import NewsList from "@/app/_components/NewsList";
 import SearchField from "@/app/_components/SearchField";
 
-// type Props = {
-//     searchParams: {
-//         q?: string;
-//     };
-// };
-
 interface Props {
     searchParams: Promise<{ q?: string }>;
 }

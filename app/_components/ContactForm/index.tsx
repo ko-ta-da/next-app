@@ -9,8 +9,14 @@ const initialState = {
     message: "",
 };
 
+// 状態パラメータを無視してcreateContactDataを呼ぶラッパー関数
+const actionWrapper = (
+    _state: { status: string; message: string },
+    formData: FormData
+    ) => createContactData(formData);
+
 export default function ContactForm() {
-    const [state, formAction, isPending] = useActionState(createContactData, initialState);
+    const [state, formAction, isPending] = useActionState<{ status: string; message: string }, FormData> (actionWrapper, initialState);
 
     console.log(state);
     if (state.status === "success") {

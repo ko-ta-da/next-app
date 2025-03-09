@@ -5,7 +5,15 @@ function validateEmail(email: string) {
     return pattern.test(email);
 }
 
-export async function createContactData(_prevState: any, formData: FormData) {
+interface ContactState {
+    lastname: string;
+    firstname: string;
+    company: string;
+    email: string;
+    message: string;
+    };
+
+export async function createContactData(formData: FormData) : Promise<{status: "success" | "error", message: string}> {
     const rawFormData = {
         lastname: formData.get("lastname") as string,
         firstname: formData.get("firstname") as string,
@@ -45,7 +53,7 @@ export async function createContactData(_prevState: any, formData: FormData) {
         };
     }
     const result = await fetch(
-        "https://api.hsforms.com/submissions/v3/integration/secure/submit/${prosess.env.HUBSPOT_PORTAL_ID}/${prosexx.env.HUBSPOT_FORM_ID}",
+        `https://api.hsforms.com/submissions/v3/integration/secure/submit/${process.env.HUBSPOT_PORTAL_ID}/${process.env.HUBSPOT_FORM_ID}`,
         {
             method: "POST",
             headers:{

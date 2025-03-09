@@ -13,7 +13,7 @@ const initialState = {
 const actionWrapper = (
     _state: { status: string; message: string },
     formData: FormData
-    ) => createContactData(formData);
+    ) => createContactData(_state,formData);
 
 export default function ContactForm() {
     const [state, formAction, isPending] = useActionState<{ status: string; message: string }, FormData> (actionWrapper, initialState);

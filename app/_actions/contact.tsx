@@ -20,7 +20,7 @@ export async function createContactData(
     if (!rawFormData.lastname) {
       return {
         status: "error",
-        message: "姓を入力してください",
+        message: "みよじを入力してください",
       };
     }
     if (!rawFormData.firstname) {
